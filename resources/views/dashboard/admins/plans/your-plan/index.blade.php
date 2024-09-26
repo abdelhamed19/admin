@@ -25,50 +25,19 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Price</th>
-                                    <th># of subscription</th>
                                     <th>Status</th>
-                                    <th>Delete</th>
-                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($plans as $plan)
+
                                     <tr>
                                         <td>{{ $plan->id }}</td>
-                                        <td><a href="{{route('show.plan',$plan->id)}}">{{ $plan->name }}</a></td>
-                                        <td>
-                                             {{ $plan->price }}
-                                        </td>
-                                        <td>
-                                            {{ $plan->subscriptions_count }}
-                                        </td>
-                                        <td>
-                                            {{ $plan->status }}
-                                        </td>
-                                        <td>
-                                            <div class="btn-circle btn-lg">
-                                                <form action="{{route('delete.plan',$plan->id)}}" method="POST" onsubmit="return confirmDelete()">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-danger btn-circle">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="{{route('edit.plan',$plan->id)}}" class="btn btn-info btn-circle">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
+                                        <td><a href="">{{ $plan->plan->name }}</a></td>
+                                        <td>{{ $plan->plan->price }}</td>
+                                        <td>{{ $plan->plan->status }}</td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="7">No plans found</td>
-                                    </tr>
-                                @endforelse
                             </tbody>
                         </table>
-                        <x-dashboard-pagination :paginator="$plans" />
                     </div>
                 </div>
             </div>

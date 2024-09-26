@@ -18,4 +18,8 @@ class Branche extends Model
     {
         return $this->morphOne(Contact::class, 'contactable');
     }
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

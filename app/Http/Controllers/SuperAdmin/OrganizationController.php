@@ -13,17 +13,17 @@ class OrganizationController extends Controller
     {
         $organizations = Organization::with('admin')
         ->withCount('branches')
-        ->paginate();
-        return view('dashboard.organizations.index', compact('organizations'));
+        ->paginate(5);
+        return view('dashboard.super-admin.organizations.index', compact('organizations'));
     }
     public function show($id)
     {
         $organization = Organization::with(['admin','branches'])->findOrFail( $id );
-        return view('dashboard.organizations.show', compact('organization'));
+        return view('dashboard.super-admin.organizations.show', compact('organization'));
     }
     public function create()
     {
-        return view('dashboard.organizations.create');
+        return view('dashboard.super-admin.organizations.create');
     }
     public function createOrganization(Request $request)
     {
@@ -38,6 +38,7 @@ class OrganizationController extends Controller
         $org =Organization::create([
             'name' => $request->name,
             'admin_id' => $admin->id,
+            'status' => $request->status,
         ]);
         foreach ($request->braches as $branch) {
             $org->branches()->create([
@@ -46,5 +47,10 @@ class OrganizationController extends Controller
             ]);
         }
         return redirect()->route('all.organizations')->with('success','Organization created successfully');
+    }
+    public function deleteOrganization($id)
+    {
+        Organization::findOrFail($id)->delete();
+        return redirect()->route('all.organizations')->with('success','Organization deleted successfully');
     }
 }

@@ -6,7 +6,10 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Branche;
+use App\Models\Cooperate;
 use App\Models\Organization;
+use App\Models\Plan;
+use App\Models\Subscription;
 use App\Models\SuperAdmin;
 use Illuminate\Database\Seeder;
 
@@ -17,30 +20,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::create([
-        //     'name' => 'User',
-        //     'email' => 'user@user.com',
-        //     'password' => '123456789',
-        //     'status' => 'active',
-        // ]);
-        // Admin::create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@admin.com',
-        //     'password' => '123456789',
-        //     'status' => 'active',
-        // ]);
         SuperAdmin::create([
             'name' => 'Super Admin',
             'email' => 'super@super.com',
             'password' => '123456789',
         ]);
-        // Organization::create([
-        //     'admin_id' => 1,
-        //     'name' => 'Organization1',
-        // ]);
-        // Branche::create([
-        //     'organization_id' => 1,
-        //     'name' => 'Branche1',
-        // ]);
+        Plan::factory(10)->create();
+        Admin::factory(10)->create();
+        Organization::factory(10)->create();
+        Cooperate::factory(10)->create();
+        Branche::factory(10)->create();
+        User::factory(10)->create();
+        Subscription::factory(10)->create();
+
     }
 }

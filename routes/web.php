@@ -26,8 +26,9 @@ Route::post('logout', [AuthController::class,'logout'])->name('logout');
 
 Route::get('admin/dashboard', function () {
     return view('dashboard.index');
-})->middleware('auth:admin,super-admin,web');
+})->middleware('auth:admin,super-admin,web')->name('admin.dashboard');
 
 
 
 require __DIR__.'/super-admin.php';
+require __DIR__.'/admin.php';

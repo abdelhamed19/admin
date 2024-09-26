@@ -22,7 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'status'
+        'status',
+        'branche_id',
     ];
 
     /**
@@ -46,5 +47,9 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+    public function branche()
+    {
+        return $this->belongsTo(Branche::class);
     }
 }
